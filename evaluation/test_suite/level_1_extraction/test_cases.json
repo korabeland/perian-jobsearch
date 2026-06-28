@@ -1,0 +1,145 @@
+[
+  {
+    "id": "extract_01",
+    "description": "Customer Experience Manager at SaaS company with full details",
+    "input": "Title: Customer Experience Manager\nCompany: Northwind Labs\nURL: https://northwindlabs.example/careers/cx-manager\n\nNorthwind Labs is looking for a Customer Experience Manager to lead customer experience initiatives across our mid-market segment. You'll own the end-to-end customer journey, drive NPS improvements, and build scalable CX programs that delight customers.\n\nRequirements:\n- 6+ years in customer experience, customer success, or related roles\n- Deep experience with Salesforce Service Cloud and CRM workflows\n- Proficiency in customer analytics (GA4, Looker, or Tableau)\n- Experience running NPS/CSAT programs (Medallia or similar)\n- Strong stakeholder management and cross-functional collaboration\n- Excellent written and verbal communication\n\nCompensation: $135,000 - $160,000 + equity\nLocation: Remote (US)",
+    "expected_output": {
+      "title": "Customer Experience Manager",
+      "company": "Northwind Labs",
+      "seniority": "senior",
+      "remote_policy": "remote",
+      "domain": "SaaS",
+      "key_requirements": ["Salesforce Service Cloud", "CRM workflows", "GA4", "Looker", "Tableau", "NPS/CSAT programs", "Medallia", "stakeholder management"],
+      "compensation": {"min": 135000, "max": 160000, "currency": "USD", "equity_mentioned": true}
+    },
+    "acceptable_alternatives": {
+      "title": ["CX Manager"]
+    },
+    "tags": ["standard", "full_info", "saas", "remote"],
+    "notes": "Standard full-info CX Manager listing. Tests basic extraction with all fields present. Manager title -> senior per management-track rules.",
+    "synthetic": true
+  },
+  {
+    "id": "extract_02",
+    "description": "Product Manager at AI company, missing compensation",
+    "input": "Title: Product Manager\nCompany: Cerebro AI\nURL: https://cerebro.example/careers/pm\n\nCerebro AI is looking for a Product Manager to shape the future of our enterprise AI products. You'll work closely with research and engineering to translate cutting-edge AI capabilities into product experiences that customers love.\n\nWhat you'll do:\n- Define product strategy and roadmap for enterprise features\n- Gather and synthesize customer feedback to inform priorities\n- Partner with design and engineering to ship high-quality experiences\n- Analyze usage data to identify opportunities and measure impact\n\nQualifications:\n- 5+ years of product management experience\n- Experience with AI/ML products or platforms\n- Strong analytical skills (SQL, product analytics tools)\n- Excellent communication and stakeholder management\n\nLocation: Austin, TX (hybrid - 3 days in office)",
+    "expected_output": {
+      "title": "Product Manager",
+      "company": "Cerebro AI",
+      "seniority": "senior",
+      "remote_policy": "hybrid",
+      "domain": "AI/ML",
+      "key_requirements": ["product strategy", "AI/ML products", "SQL", "product analytics", "stakeholder management", "customer feedback synthesis"],
+      "compensation": {"min": null, "max": null, "currency": null, "equity_mentioned": false}
+    },
+    "acceptable_alternatives": {
+      "key_requirements_partial": true
+    },
+    "tags": ["ic_pm", "missing_comp", "ai_ml", "hybrid"],
+    "notes": "IC PM role -- 'Product Manager' defaults to senior per crossover rules. No compensation listed. Tests missing comp handling and PM seniority mapping.",
+    "synthetic": true
+  },
+  {
+    "id": "extract_03",
+    "description": "Director of Customer Experience at SaaS company -- principal seniority",
+    "input": "Title: Director of Customer Experience\nCompany: Globex Software\nURL: https://globex.example/careers/director-cx\n\nGlobex Software is seeking a Director of Customer Experience to lead our global CX strategy. You'll own the voice-of-customer program, drive CX transformation, and manage a team of 12 across support, success, and operations.\n\nResponsibilities:\n- Define and execute the CX strategy across all customer segments\n- Build and lead the CX team (12 direct and indirect reports)\n- Own NPS, CSAT, and customer health metrics\n- Partner with Product and Engineering to close the customer feedback loop\n- Drive CX technology roadmap (Salesforce, Medallia, Gainsight)\n\nRequirements:\n- 10+ years in customer experience or customer success leadership\n- 5+ years managing CX teams of 8+\n- Deep expertise with CX platforms (Salesforce, Medallia, Gainsight)\n- Strong data-driven decision making (Looker, Tableau, or Power BI)\n- Experience with B2B SaaS customer lifecycle management\n\nCompensation: $165,000 - $200,000 + equity\nLocation: Remote (US/Canada)",
+    "expected_output": {
+      "title": "Director of Customer Experience",
+      "company": "Globex Software",
+      "seniority": "principal",
+      "remote_policy": "remote",
+      "domain": "SaaS",
+      "key_requirements": ["CX strategy", "Salesforce", "Medallia", "Gainsight", "Looker", "Tableau", "Power BI", "B2B SaaS"],
+      "compensation": {"min": 165000, "max": 200000, "currency": "USD", "equity_mentioned": true}
+    },
+    "acceptable_alternatives": {
+      "title": ["Director, Customer Experience"]
+    },
+    "tags": ["principal", "director", "saas", "remote"],
+    "notes": "Tests 'Director' -> principal mapping. Title may be normalized -- both acceptable.",
+    "synthetic": true
+  },
+  {
+    "id": "extract_04",
+    "description": "Director of Customer Operations at fintech firm -- principal, hybrid",
+    "input": "Title: Director, Customer Operations\nCompany: Meridian Financial\nURL: https://meridianfin.example/careers/director-customer-ops\n\nMeridian Financial is hiring a Director of Customer Operations to lead operational excellence across our client services organization. You'll own the operating model, scale repeatable processes, and partner cross-functionally to improve the client lifecycle.\n\nResponsibilities:\n- Lead a customer operations team of 10-15\n- Build and scale operational frameworks and playbooks\n- Drive process improvement and change management\n- Partner with product, support, and success on the client journey\n- Report operational metrics to senior leadership\n\nRequirements:\n- 10+ years in customer operations, customer success, or service operations\n- Experience leading operations teams at scale\n- Strong process design and change management expertise\n- Proficiency with Salesforce and operational analytics\n- Willingness to travel up to 20%\n\nCompensation: $150,000 - $185,000 + performance bonus\nLocation: New York, NY (hybrid - 2 days in office)",
+    "expected_output": {
+      "title": "Director, Customer Operations",
+      "company": "Meridian Financial",
+      "seniority": "principal",
+      "remote_policy": "hybrid",
+      "domain": "fintech",
+      "key_requirements": ["customer operations", "process improvement", "change management", "Salesforce", "operational analytics", "team leadership", "cross-functional collaboration"],
+      "compensation": {"min": 150000, "max": 185000, "currency": "USD", "equity_mentioned": false}
+    },
+    "acceptable_alternatives": {
+      "title": ["Director of Customer Operations"],
+      "domain": ["financial services"]
+    },
+    "tags": ["principal", "director", "fintech", "hybrid"],
+    "notes": "Tests Director -> principal mapping. Domain could be fintech or financial services. Performance bonus is not equity.",
+    "synthetic": true
+  },
+  {
+    "id": "extract_05",
+    "description": "Junior Support Coordinator at large enterprise -- negative match",
+    "input": "Title: Junior Support Coordinator\nCompany: MegaMart Global\nURL: https://megamart.example/careers/jr-support-coordinator\n\nMegaMart Global (50,000+ employees) is looking for a Junior Support Coordinator to support our North American e-commerce customer support team.\n\nResponsibilities:\n- Respond to customer tickets in Zendesk\n- Update order records in our internal tools\n- Track support metrics in Google Sheets\n- Escalate issues to senior support staff\n\nRequirements:\n- 1-2 years of customer support experience\n- Familiarity with Zendesk and ticketing systems\n- Basic Excel and Google Sheets skills\n- Strong attention to detail\n\nCompensation: $45,000 - $55,000\nLocation: On-site, Columbus OH (no remote options available)",
+    "expected_output": {
+      "title": "Junior Support Coordinator",
+      "company": "MegaMart Global",
+      "seniority": "junior",
+      "remote_policy": "onsite",
+      "domain": "e-commerce",
+      "key_requirements": ["Zendesk", "ticketing systems", "Google Sheets", "Excel", "customer support", "data entry"],
+      "compensation": {"min": 45000, "max": 55000, "currency": "USD", "equity_mentioned": false}
+    },
+    "acceptable_alternatives": {
+      "domain": ["retail", "customer support"]
+    },
+    "tags": ["negative_match", "junior", "onsite", "large_enterprise"],
+    "notes": "Multiple dealbreakers: junior seniority, onsite, large enterprise. Tests Coordinator -> junior mapping and explicit 'no remote' -> onsite.",
+    "synthetic": true
+  },
+  {
+    "id": "extract_06",
+    "description": "Customer Success Lead at developer-tools company -- staff seniority, no comp",
+    "input": "Title: Customer Success Lead\nCompany: Forge DevTools\nURL: https://forgedevtools.example/careers/cs-lead\n\nForge DevTools builds developer productivity tooling for engineering teams. We're hiring a Customer Success Lead to own the post-sale relationship for our growing enterprise accounts.\n\nWhat you'll do:\n- Lead onboarding and adoption for enterprise customers\n- Own renewal and expansion targets for your book of business\n- Build playbooks to reduce churn and drive product adoption\n- Partner with product to surface customer feedback\n\nQualifications:\n- 7+ years in customer success or account management\n- Experience with Gainsight or a comparable CS platform\n- Strong analytical skills (SQL a plus)\n- Excellent stakeholder management\n\nLocation: Seattle, WA (hybrid - in-office Tue/Wed/Thu)",
+    "expected_output": {
+      "title": "Customer Success Lead",
+      "company": "Forge DevTools",
+      "seniority": "staff",
+      "remote_policy": "hybrid",
+      "domain": "developer tools",
+      "key_requirements": ["customer success", "Gainsight", "onboarding", "churn reduction", "SQL", "stakeholder management"],
+      "compensation": {"min": null, "max": null, "currency": null, "equity_mentioned": false}
+    },
+    "acceptable_alternatives": {
+      "domain": ["SaaS", "B2B technology"]
+    },
+    "tags": ["staff", "lead_title", "developer_tools", "hybrid", "missing_comp"],
+    "notes": "Tests 'Lead' without 'Manager' -> staff mapping. No compensation mentioned. 3-day in-office with specific days -> hybrid.",
+    "synthetic": true
+  },
+  {
+    "id": "extract_07",
+    "description": "Fantasy title, sparse listing, unknown company",
+    "input": "Customer Happiness Guru - Join our awesome startup! We need a rockstar who lives and breathes customer delight. You'll be the voice of the customer and use data to make magic happen. Must love solving problems and making people smile. Remote friendly. Apply now!",
+    "expected_output": {
+      "title": "Customer Experience Manager",
+      "company": null,
+      "seniority": "mid",
+      "remote_policy": "remote",
+      "domain": null,
+      "key_requirements": ["customer experience", "data analysis"],
+      "compensation": {"min": null, "max": null, "currency": null, "equity_mentioned": false}
+    },
+    "acceptable_alternatives": {
+      "title": ["Customer Success Manager", "CX Specialist", "CX Manager"],
+      "seniority": ["junior"],
+      "remote_policy": ["unknown"]
+    },
+    "tags": ["edge_case", "fantasy_title", "sparse_listing", "no_company"],
+    "notes": "Tests fantasy title normalization (Guru -> professional equivalent). Very sparse listing with no company name, no comp, no requirements. Seniority defaults to mid with no signals. 'Remote friendly' -> remote or unknown.",
+    "synthetic": true
+  }
+]

@@ -1,0 +1,67 @@
+[
+  {
+    "id": "class_01",
+    "description": "Clear: Customer Experience Manager -> senior seniority",
+    "input": "Title: Customer Experience Manager\nCompany: Brightwave Software\nURL: https://brightwave.example/careers/cx-mgr\n\nWe're looking for a Customer Experience Manager to own our customer experience strategy. You'll drive NPS improvements and partner with Product to close the feedback loop.\n\nRequirements:\n- 5+ years in CX or customer success\n- Salesforce Service Cloud expertise\n- Experience with NPS/CSAT programs\n\nCompensation: $130,000 - $155,000 + equity\nLocation: Remote (US)",
+    "expected_output": {"seniority": "senior", "domain": "SaaS", "remote_policy": "remote"},
+    "tags": ["clear_seniority", "manager_title", "remote"],
+    "notes": "Manager title + 5+ years -> senior per management-track rules. SaaS company, explicit remote.",
+    "synthetic": true
+  },
+  {
+    "id": "class_02",
+    "description": "Edge: Senior Manager, CX -> staff seniority",
+    "input": "Title: Senior Manager, Customer Experience\nCompany: Cloudhaven\nURL: https://cloudhaven.example/careers/sr-mgr-cx\n\nCloudhaven is looking for a Senior Manager of Customer Experience to lead a team of 8 CX specialists. You'll set the CX strategy for our cloud products and manage cross-regional programs.\n\nRequirements:\n- 8+ years in CX leadership\n- 3+ years managing CX teams\n- B2B SaaS experience required\n\nLocation: San Francisco (hybrid, 2 days/week)",
+    "expected_output": {"seniority": "staff", "domain": "SaaS", "remote_policy": "hybrid"},
+    "tags": ["seniority_edge", "senior_manager", "hybrid"],
+    "notes": "Senior Manager = staff per management-track rules. Key test: models often classify 'Senior Manager' as just 'senior' -- it should be 'staff'.",
+    "synthetic": true
+  },
+  {
+    "id": "class_03",
+    "description": "Edge: Product Manager IC -> senior (crossover rule)",
+    "input": "Title: Product Manager\nCompany: Nimbus AI\nURL: https://nimbus.example/careers/pm\n\nJoin Nimbus AI as a Product Manager for our API platform. You'll own the developer experience and work with engineering to ship features that millions of developers use.\n\nRequirements:\n- 5+ years product management\n- Technical background with API/platform products\n- Experience with AI/ML products preferred\n\nLocation: San Francisco (hybrid - 3 days in office)",
+    "expected_output": {"seniority": "senior", "domain": "AI/ML", "remote_policy": "hybrid"},
+    "tags": ["seniority_edge", "pm_crossover", "hybrid"],
+    "notes": "Product Manager defaults to senior per crossover rules (PM title implies ownership scope). Not mid despite no 'Senior' prefix.",
+    "synthetic": true
+  },
+  {
+    "id": "class_04",
+    "description": "Edge: location listed but no remote/hybrid keywords -> unknown",
+    "input": "Title: Senior Customer Success Manager\nCompany: Vantage Pay\nURL: https://vantagepay.example/careers/sr-csm\n\nVantage Pay is hiring a Senior Customer Success Manager to own retention and expansion for our enterprise payments clients.\n\nRequirements:\n- 7+ years in customer success or account management\n- Experience in fintech or financial services\n- Gainsight proficiency\n\nCompensation: $140,000 - $170,000\nLocations: Austin, TX | Denver, CO",
+    "expected_output": {"seniority": "senior", "domain": "fintech", "remote_policy": "unknown"},
+    "acceptable_alternatives": {"remote_policy": ["onsite"], "domain": ["financial services", "SaaS"]},
+    "tags": ["remote_edge", "location_only", "fintech"],
+    "notes": "Office locations listed but no remote/hybrid keywords -> should be 'unknown' per extraction rules. Common model mistake is to say 'onsite'. Senior in title + 7+ years -> senior.",
+    "synthetic": true
+  },
+  {
+    "id": "class_05",
+    "description": "Edge: Director of Customer Experience = principal seniority",
+    "input": "Title: Director of Customer Experience\nCompany: Riverstone CRM\nURL: https://riverstone.example/careers/director-cx\n\nRiverstone CRM is looking for a Director of Customer Experience to build and lead our global CX function. You'll define the CX vision, manage a team of 15+, and report to the Chief Customer Officer.\n\nRequirements:\n- 10+ years in CX or customer success\n- 5+ years in senior leadership roles\n\nLocation: Remote (global)",
+    "expected_output": {"seniority": "principal", "domain": "SaaS", "remote_policy": "remote"},
+    "tags": ["seniority_edge", "director", "remote"],
+    "notes": "Director = principal per management-track rules. Tests that models don't default to 'senior' for Director-level titles.",
+    "synthetic": true
+  },
+  {
+    "id": "class_06",
+    "description": "Edge: VP of Customer Strategy = executive seniority",
+    "input": "Title: VP of Customer Strategy\nCompany: Meridian Financial\nURL: https://meridianfin.example/careers/vp-customer-strategy\n\nMeridian Financial is seeking a VP of Customer Strategy to define and execute our long-term customer engagement and retention approach. You'll report directly to the CEO and lead a department of 30+.\n\nRequirements:\n- 15+ years in CX, customer success, or strategy\n- 7+ years in executive leadership\n- Fintech or financial services experience preferred\n\nCompensation: $250,000 - $320,000 + equity\nLocation: San Francisco (hybrid - 2 days in office)",
+    "expected_output": {"seniority": "executive", "domain": "fintech", "remote_policy": "hybrid"},
+    "tags": ["seniority_edge", "executive", "vp_title", "hybrid"],
+    "notes": "VP = executive per management-track rules. Tests the top of the seniority spectrum.",
+    "synthetic": true
+  },
+  {
+    "id": "class_07",
+    "description": "Edge: CX role at AI company -> domain ambiguity",
+    "input": "Title: Customer Experience Manager\nCompany: Synthate AI\nURL: https://synthate.example/careers/cx-manager\n\nSynthate AI builds enterprise AI platforms for natural language understanding. We're hiring a Customer Experience Manager to lead CX for our growing enterprise segment.\n\nRequirements:\n- 5+ years in CX or customer success at a B2B tech company\n- Experience with AI/ML products is a strong plus\n\nCompensation: $140,000 - $170,000 + equity\nLocation: Remote (US/Canada)",
+    "expected_output": {"seniority": "senior", "domain": "AI/ML", "remote_policy": "remote"},
+    "acceptable_alternatives": {"domain": ["SaaS", "B2B technology"]},
+    "tags": ["domain_edge", "ai_company_cx_role", "remote"],
+    "notes": "Synthate AI is an AI company, but the role is CX. Domain should follow company's primary domain (AI/ML), but 'SaaS' is also acceptable since it's a B2B platform. Tests domain resolution when company domain != role function.",
+    "synthetic": true
+  }
+]

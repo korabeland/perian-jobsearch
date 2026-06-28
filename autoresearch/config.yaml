@@ -1,0 +1,20 @@
+loop:
+  max_iterations: 10
+  headless_model: sonnet         # Claude Code model for headless session
+  max_consecutive_rejects: 3     # stop after N rejections in a row
+  local_model: "qwen3.5:9b-nvfp4"
+  runs_per_item: 3
+  holdout_split: 0.8
+  holdout_seed: 42
+safety:
+  max_capability_drop: 0.03
+  run_full_suite_after: true
+  eval_levels: [1, 2, 3, 4]  # L4 fixed (distance-based scoring). L5-L6 still out pending validation.
+  eval_n_runs: 3
+mutation:
+  max_prompt_length_increase: 0.25
+  preserve_delimiter: true
+  preserve_placeholders: true
+git:
+  auto_commit_improvements: true
+  commit_prefix: "autoresearch:"

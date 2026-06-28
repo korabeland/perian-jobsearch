@@ -6,3 +6,11 @@ PyYAML>=6.0
 #   python-jobspy            # jobspy aggregator (Indeed/Google)
 #   google-api-python-client # gmail_alerts adapter
 #   google-auth-oauthlib     # gmail_alerts OAuth
+
+# The evaluation suite (evaluation/) uses only requests + PyYAML above.
+# Levels 1 and 6 additionally need a local embedding model for semantic
+# scoring:  ollama pull nomic-embed-text
+
+# Optional — only needed for autoresearch/generate_holdout.py (one-time
+# holdout generation via the Claude API):
+#   anthropic

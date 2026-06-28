@@ -1,0 +1,76 @@
+[
+  {
+    "id": "synth_01",
+    "description": "Summarize the most common requirements across three CX listings",
+    "input": {
+      "listings": [
+        {"title": "Customer Experience Manager", "company": "Acme Cloud", "domain": "SaaS", "key_requirements": ["Salesforce", "Medallia", "CX strategy", "SQL", "stakeholder management", "NPS/CSAT"]},
+        {"title": "Customer Experience Manager", "company": "Brightwave Software", "domain": "SaaS", "key_requirements": ["Salesforce", "Medallia", "customer journey mapping", "SQL", "Looker"]},
+        {"title": "Director of Customer Experience", "company": "Globex Software", "domain": "SaaS", "key_requirements": ["Salesforce", "Gainsight", "CX strategy", "team leadership", "stakeholder management", "Tableau"]}
+      ],
+      "task": "Summarize the most common requirements across these three listings and note which skills appear most frequently."
+    },
+    "expected_facts": [
+      "Salesforce appears in all three listings",
+      "SQL is a common requirement across multiple listings",
+      "Medallia appears in two of the listings",
+      "stakeholder management is a recurring requirement"
+    ],
+    "must_not_hallucinate": [
+      "the number of employees at each company",
+      "specific salary figures for these roles",
+      "the founding dates of the companies"
+    ],
+    "tags": ["common_requirements", "multi_listing", "saas"],
+    "synthetic": true
+  },
+  {
+    "id": "synth_02",
+    "description": "Compare candidate skills to listing requirements and identify gaps",
+    "input": {
+      "listings": [
+        {"title": "Customer Experience Manager", "company": "Acme Cloud", "domain": "SaaS", "key_requirements": ["Salesforce", "Gainsight", "customer journey mapping", "Medallia", "SQL"]},
+        {"title": "Customer Success Lead", "company": "Forge DevTools", "domain": "developer tools", "key_requirements": ["Gainsight", "churn analysis", "Looker", "onboarding", "Python"]}
+      ],
+      "task": "Compare the candidate's skills to the requirements in these listings. Identify which requirements the candidate covers and which are gaps.",
+      "profile_skills": ["Salesforce (expert)", "Service Cloud (proficient)", "Gainsight (proficient)", "Medallia (proficient)", "GA4 (proficient)", "Looker (proficient)", "Tableau (working)", "SQL (proficient)", "Python (working)"]
+    },
+    "expected_facts": [
+      "the candidate has Salesforce experience that matches a listing requirement",
+      "Gainsight is in the candidate profile and is required by both listings",
+      "the candidate's SQL and Looker skills match listing requirements",
+      "the candidate covers most of the required skills with few gaps"
+    ],
+    "must_not_hallucinate": [
+      "the candidate's exact years of experience",
+      "professional certifications held by the candidate",
+      "the candidate's current employer"
+    ],
+    "tags": ["skill_match", "gap_analysis"],
+    "synthetic": true
+  },
+  {
+    "id": "synth_03",
+    "description": "Compare two roles for the candidate and note the trade-offs",
+    "input": {
+      "listings": [
+        {"title": "Customer Experience Manager", "company": "Acme Cloud", "domain": "SaaS", "seniority": "senior", "remote_policy": "remote", "compensation": {"min": 140000, "max": 170000}, "key_requirements": ["Salesforce", "Medallia", "CX strategy", "SQL", "stakeholder management"]},
+        {"title": "Director of Customer Experience", "company": "Globex Software", "domain": "SaaS", "seniority": "principal", "remote_policy": "hybrid", "location": "Chicago, 2 days/week", "compensation": {"min": 165000, "max": 200000}, "key_requirements": ["CX strategy", "Salesforce", "team leadership", "NPS/CSAT", "Medallia"]}
+      ],
+      "task": "Compare these two roles for the candidate and note the key trade-offs between them."
+    },
+    "expected_facts": [
+      "the Director role is more senior than the Manager role",
+      "the Director role offers higher compensation",
+      "the Manager role is fully remote while the Director role is hybrid",
+      "both roles are at SaaS companies and require Salesforce"
+    ],
+    "must_not_hallucinate": [
+      "the total headcount of either company",
+      "the interview process for either role",
+      "benefits packages not stated in the listings"
+    ],
+    "tags": ["comparison", "trade_offs", "two_roles"],
+    "synthetic": true
+  }
+]

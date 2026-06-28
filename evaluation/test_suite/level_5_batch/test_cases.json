@@ -1,0 +1,106 @@
+{
+  "description": "Batch consistency: same-role groups should extract and score consistently; the remote-policy gradient group should differentiate by score in a predictable rank order.",
+  "n_runs": 3,
+  "groups": [
+    {
+      "id": "group_1_identical_cx_manager",
+      "description": "Three near-identical CX Manager roles at different SaaS companies -- extraction and scoring should be stable.",
+      "expected_consistency": {
+        "extraction": {
+          "seniority_should_match": true,
+          "seniority_value": "senior",
+          "domain_should_match": true,
+          "domain_value": "SaaS",
+          "remote_policy_should_match": true,
+          "remote_policy_value": "remote"
+        },
+        "scoring": {
+          "max_score_variance": 0.05,
+          "notes": "All three are strong matches and should score similarly high."
+        }
+      },
+      "items": [
+        {
+          "id": "g1_acme",
+          "input": "Title: Customer Experience Manager\nCompany: Acme Cloud\nURL: https://acmecloud.example/jobs/cx\n\nAcme Cloud builds B2B customer engagement software. We're hiring a Customer Experience Manager to lead our CX program.\n\nRequirements:\n- 5+ years in customer experience or customer success\n- Salesforce Service Cloud expertise\n- Experience with NPS/CSAT measurement (Medallia preferred)\n- Cross-functional stakeholder management\n- Data-driven decision making (SQL a plus)\n\nCompensation: $135,000 - $165,000 + equity\nLocation: Remote (US)"
+        },
+        {
+          "id": "g1_brightwave",
+          "input": "Title: Customer Experience Manager\nCompany: Brightwave Software\nURL: https://brightwave.example/jobs/cx\n\nBrightwave Software builds customer engagement tools for the world's best companies. We need a Customer Experience Manager to drive CX improvements across our platform.\n\nRequirements:\n- 5+ years of CX or customer success experience\n- Salesforce and CRM expertise\n- Medallia or similar survey platform experience\n- Strong stakeholder management skills\n- Analytical mindset (SQL, data visualization)\n\nCompensation: $140,000 - $170,000 + equity\nLocation: Remote (US)"
+        },
+        {
+          "id": "g1_riverstone",
+          "input": "Title: Customer Experience Manager\nCompany: Riverstone CRM\nURL: https://riverstone.example/jobs/cx\n\nRiverstone CRM is a customer relationship platform. We're looking for a Customer Experience Manager to own our customer experience program.\n\nRequirements:\n- 5+ years in customer experience management\n- Salesforce administration\n- Survey and feedback tools (Medallia, Gainsight)\n- Cross-team collaboration and stakeholder management\n- SQL and data analysis skills\n\nCompensation: $138,000 - $168,000 + equity\nLocation: Remote (US)"
+        }
+      ]
+    },
+    {
+      "id": "group_2_remote_policy_gradient",
+      "description": "Same CX Manager role at one company, varying only the remote policy -- scores should differentiate (remote > hybrid > onsite).",
+      "expected_consistency": {
+        "extraction": {
+          "seniority_should_match": true,
+          "seniority_value": "senior",
+          "domain_should_match": true,
+          "domain_value": "SaaS",
+          "remote_policy_should_match": false
+        },
+        "scoring": {
+          "max_score_variance": 0.20,
+          "expected_rank_order": ["g2_remote", "g2_hybrid_2d", "g2_hybrid_4d", "g2_onsite"],
+          "notes": "Identical except remote policy. Remote earns the bonus; onsite earns the penalty. Variance is expected and correct here."
+        }
+      },
+      "items": [
+        {
+          "id": "g2_remote",
+          "input": "Title: Customer Experience Manager\nCompany: Cloudhaven\nURL: https://cloudhaven.example/jobs/1\n\nCloudhaven builds B2B customer engagement software. We need a Customer Experience Manager.\n\nRequirements:\n- 5+ years customer experience management\n- Salesforce, Medallia\n- Cross-functional stakeholder management\n- SQL and data analysis\n\nCompensation: $140,000 - $170,000 + equity\nLocation: Remote (US)"
+        },
+        {
+          "id": "g2_hybrid_2d",
+          "input": "Title: Customer Experience Manager\nCompany: Cloudhaven\nURL: https://cloudhaven.example/jobs/2\n\nCloudhaven builds B2B customer engagement software. We need a Customer Experience Manager.\n\nRequirements:\n- 5+ years customer experience management\n- Salesforce, Medallia\n- Cross-functional stakeholder management\n- SQL and data analysis\n\nCompensation: $140,000 - $170,000 + equity\nLocation: Austin, TX (hybrid, 2 days/week)"
+        },
+        {
+          "id": "g2_hybrid_4d",
+          "input": "Title: Customer Experience Manager\nCompany: Cloudhaven\nURL: https://cloudhaven.example/jobs/3\n\nCloudhaven builds B2B customer engagement software. We need a Customer Experience Manager.\n\nRequirements:\n- 5+ years customer experience management\n- Salesforce, Medallia\n- Cross-functional stakeholder management\n- SQL and data analysis\n\nCompensation: $140,000 - $170,000 + equity\nLocation: Austin, TX (hybrid, 4 days/week)"
+        },
+        {
+          "id": "g2_onsite",
+          "input": "Title: Customer Experience Manager\nCompany: Cloudhaven\nURL: https://cloudhaven.example/jobs/4\n\nCloudhaven builds B2B customer engagement software. We need a Customer Experience Manager.\n\nRequirements:\n- 5+ years customer experience management\n- Salesforce, Medallia\n- Cross-functional stakeholder management\n- SQL and data analysis\n\nCompensation: $140,000 - $170,000 + equity\nLocation: On-site only, San Francisco"
+        }
+      ]
+    },
+    {
+      "id": "group_3_director_consistency",
+      "description": "Three Director of Customer Experience roles at different SaaS companies -- seniority should consistently extract as principal.",
+      "expected_consistency": {
+        "extraction": {
+          "seniority_should_match": true,
+          "seniority_value": "principal",
+          "domain_should_match": true,
+          "domain_value": "SaaS",
+          "remote_policy_should_match": true,
+          "remote_policy_value": "remote"
+        },
+        "scoring": {
+          "max_score_variance": 0.06,
+          "notes": "All three are strong principal-level matches and should score consistently."
+        }
+      },
+      "items": [
+        {
+          "id": "g3_globex",
+          "input": "Title: Director of Customer Experience\nCompany: Globex Software\nURL: https://globex.example/jobs/dir\n\nGlobex Software seeks a Director of Customer Experience to lead our global CX strategy and a team of 12.\n\nRequirements:\n- 10+ years in CX or customer success leadership\n- Salesforce, Medallia, Gainsight\n- Looker or Tableau for reporting\n- B2B SaaS customer lifecycle management\n\nCompensation: $165,000 - $200,000 + equity\nLocation: Remote (US)"
+        },
+        {
+          "id": "g3_northwind",
+          "input": "Title: Director of Customer Experience\nCompany: Northwind Labs\nURL: https://northwindlabs.example/jobs/dir\n\nNorthwind Labs is hiring a Director of Customer Experience to own the voice-of-customer program and lead the CX function.\n\nRequirements:\n- 10+ years in customer experience leadership\n- Salesforce, Medallia\n- Data-driven decision making (Looker, Tableau)\n- B2B SaaS experience\n\nCompensation: $160,000 - $195,000 + equity\nLocation: Remote (US)"
+        },
+        {
+          "id": "g3_acme",
+          "input": "Title: Director of Customer Experience\nCompany: Acme Cloud\nURL: https://acmecloud.example/jobs/dir\n\nAcme Cloud is looking for a Director of Customer Experience to define CX vision and lead a team across support, success, and operations.\n\nRequirements:\n- 10+ years in CX or customer success leadership\n- Salesforce, Gainsight, Medallia\n- Looker or Power BI\n- B2B SaaS customer lifecycle management\n\nCompensation: $170,000 - $205,000 + equity\nLocation: Remote (US/Canada)"
+        }
+      ]
+    }
+  ]
+}

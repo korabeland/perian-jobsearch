@@ -1,0 +1,198 @@
+[
+  {
+    "id": "score_01",
+    "description": "Strong match: Customer Experience Manager at SaaS company, remote, good comp",
+    "input": {
+      "title": "Customer Experience Manager",
+      "company": "Acme Cloud",
+      "seniority": "senior",
+      "remote_policy": "remote",
+      "domain": "SaaS",
+      "key_requirements": ["Salesforce Service Cloud", "CRM workflows", "NPS/CSAT programs", "Medallia", "stakeholder management", "GA4", "Looker", "cross-functional collaboration"],
+      "compensation": {"min": 130000, "max": 150000, "currency": "USD", "equity_mentioned": true}
+    },
+    "expected_output": {
+      "scores": {
+        "title_match": {"score": 1.0, "tolerance": 0.10},
+        "domain_match": {"score": 1.0, "tolerance": 0.10},
+        "seniority_match": {"score": 1.0, "tolerance": 0.10},
+        "requirements_fit": {"score": 0.85, "tolerance": 0.15},
+        "compensation_fit": {"score": 1.0, "tolerance": 0.15}
+      },
+      "expected_bonus": true,
+      "expected_penalty": false,
+      "total_score_range": [0.85, 1.0]
+    },
+    "tags": ["strong_match", "remote_bonus", "perfect_profile"],
+    "notes": "Near-perfect match. Customer Experience Manager is exact target title, SaaS is target domain, senior is in range, comp within $125k-$175k. Remote bonus should apply. Requirements: Salesforce, Medallia, GA4, Looker, stakeholder management all match profile.",
+    "synthetic": true
+  },
+  {
+    "id": "score_02",
+    "description": "Strong match: Product Manager at AI company, hybrid, unknown comp",
+    "input": {
+      "title": "Product Manager",
+      "company": "Cerebro AI",
+      "seniority": "senior",
+      "remote_policy": "hybrid",
+      "domain": "AI/ML",
+      "key_requirements": ["product strategy", "AI/ML products", "SQL", "product analytics", "stakeholder management", "customer feedback synthesis"],
+      "compensation": {"min": null, "max": null, "currency": null, "equity_mentioned": false}
+    },
+    "expected_output": {
+      "scores": {
+        "title_match": {"score": 0.9, "tolerance": 0.15},
+        "domain_match": {"score": 1.0, "tolerance": 0.10},
+        "seniority_match": {"score": 1.0, "tolerance": 0.10},
+        "requirements_fit": {"score": 0.7, "tolerance": 0.20},
+        "compensation_fit": {"score": 0.5, "tolerance": 0.15}
+      },
+      "expected_bonus": true,
+      "expected_penalty": false,
+      "total_score_range": [0.70, 1.0]
+    },
+    "tags": ["strong_match", "no_comp", "hybrid"],
+    "notes": "Product Manager is a target title. Hybrid -- the profile accepts both remote and hybrid, so the preference bonus applies. Unknown comp -> 0.5 per scoring rules. Requirements: product strategy, SQL, stakeholder management match; AI/ML products is adjacent.",
+    "synthetic": true
+  },
+  {
+    "id": "score_03",
+    "description": "Strong match: Director of Customer Experience at SaaS company, remote, high comp",
+    "input": {
+      "title": "Director of Customer Experience",
+      "company": "Globex Software",
+      "seniority": "principal",
+      "remote_policy": "remote",
+      "domain": "SaaS",
+      "key_requirements": ["CX strategy", "NPS/CSAT", "Salesforce", "Medallia", "Gainsight", "Looker", "B2B SaaS customer lifecycle", "team leadership"],
+      "compensation": {"min": 165000, "max": 200000, "currency": "USD", "equity_mentioned": true}
+    },
+    "expected_output": {
+      "scores": {
+        "title_match": {"score": 1.0, "tolerance": 0.10},
+        "domain_match": {"score": 1.0, "tolerance": 0.10},
+        "seniority_match": {"score": 1.0, "tolerance": 0.10},
+        "requirements_fit": {"score": 0.80, "tolerance": 0.15},
+        "compensation_fit": {"score": 0.8, "tolerance": 0.20}
+      },
+      "expected_bonus": true,
+      "expected_penalty": false,
+      "total_score_range": [0.85, 1.0]
+    },
+    "tags": ["strong_match", "principal", "remote_bonus"],
+    "notes": "Director of Customer Experience is an exact target title, principal is in range. Remote bonus applies. Comp range $165k-$200k overlaps candidate range ($125k-$175k) -- min is within range but max exceeds it. Model should score comp 0.7-1.0. Strong requirements overlap.",
+    "synthetic": true
+  },
+  {
+    "id": "score_04",
+    "description": "Negative match: junior support coordinator, onsite, low comp -- dealbreaker cascade",
+    "input": {
+      "title": "Junior Support Coordinator",
+      "company": "MegaMart Global",
+      "seniority": "junior",
+      "remote_policy": "onsite",
+      "domain": "e-commerce",
+      "key_requirements": ["Zendesk", "ticketing systems", "Google Sheets", "data entry"],
+      "compensation": {"min": 45000, "max": 55000, "currency": "USD", "equity_mentioned": false}
+    },
+    "expected_output": {
+      "scores": {
+        "title_match": {"score": 0.1, "tolerance": 0.10},
+        "domain_match": {"score": 0.2, "tolerance": 0.15},
+        "seniority_match": {"score": 0.0, "tolerance": 0.10},
+        "requirements_fit": {"score": 0.2, "tolerance": 0.15},
+        "compensation_fit": {"score": 0.2, "tolerance": 0.15}
+      },
+      "expected_bonus": false,
+      "expected_penalty": true,
+      "total_score_range": [0.0, 0.15]
+    },
+    "tags": ["negative_match", "dealbreaker_cascade", "junior", "onsite"],
+    "notes": "Tests penalty stacking: junior (-0.40) + onsite (-0.30) = -0.70 in penalties. Everything is wrong: title, domain, seniority, requirements, comp. Should score near zero after penalties.",
+    "synthetic": true
+  },
+  {
+    "id": "score_05",
+    "description": "Weak match: Senior Backend Engineer -- wrong function entirely",
+    "input": {
+      "title": "Senior Backend Engineer",
+      "company": "Stackline",
+      "seniority": "senior",
+      "remote_policy": "remote",
+      "domain": "developer tools",
+      "key_requirements": ["Python", "Go", "Kubernetes", "distributed systems", "PostgreSQL", "API design", "AWS"],
+      "compensation": {"min": 170000, "max": 210000, "currency": "USD", "equity_mentioned": true}
+    },
+    "expected_output": {
+      "scores": {
+        "title_match": {"score": 0.15, "tolerance": 0.20},
+        "domain_match": {"score": 0.5, "tolerance": 0.25},
+        "seniority_match": {"score": 1.0, "tolerance": 0.10},
+        "requirements_fit": {"score": 0.25, "tolerance": 0.20},
+        "compensation_fit": {"score": 0.8, "tolerance": 0.20}
+      },
+      "expected_bonus": false,
+      "expected_penalty": false,
+      "total_score_range": [0.25, 0.55]
+    },
+    "tags": ["weak_match", "wrong_function"],
+    "notes": "Backend engineering is a completely different function from CX/CS/Product. Developer tools is a target domain (so domain_match is moderate), but the function is wrong. Remote bonus should not apply -- the role is fundamentally a wrong-function match. Title floor penalty applies (title_match < 0.3).",
+    "synthetic": true
+  },
+  {
+    "id": "score_06",
+    "description": "Moderate match: right title, wrong context -- onsite + large enterprise penalties",
+    "input": {
+      "title": "Customer Experience Manager",
+      "company": "MegaMart Global",
+      "seniority": "senior",
+      "remote_policy": "onsite",
+      "domain": "retail",
+      "key_requirements": ["Salesforce", "CRM workflows", "email campaigns", "customer surveys", "Google Sheets", "team coordination"],
+      "compensation": {"min": 130000, "max": 150000, "currency": "USD", "equity_mentioned": false}
+    },
+    "expected_output": {
+      "scores": {
+        "title_match": {"score": 1.0, "tolerance": 0.10},
+        "domain_match": {"score": 0.3, "tolerance": 0.20},
+        "seniority_match": {"score": 1.0, "tolerance": 0.10},
+        "requirements_fit": {"score": 0.5, "tolerance": 0.20},
+        "compensation_fit": {"score": 1.0, "tolerance": 0.15}
+      },
+      "expected_bonus": false,
+      "expected_penalty": true,
+      "total_score_range": [0.10, 0.45]
+    },
+    "tags": ["moderate_match", "right_title_wrong_context", "onsite_penalty", "large_enterprise"],
+    "notes": "Customer Experience Manager is an exact title match, but context is wrong: onsite (-0.30) and 'MegaMart Global' signals large enterprise (-0.20). Retail is not a target domain. Both penalties should apply -- onsite is explicit, and the 50,000-employee company is a clear large enterprise signal.",
+    "synthetic": true
+  },
+  {
+    "id": "score_07",
+    "description": "Strong match: Customer Operations Lead at developer-tools company, hybrid, unknown comp",
+    "input": {
+      "title": "Customer Operations Lead",
+      "company": "Forge DevTools",
+      "seniority": "staff",
+      "remote_policy": "hybrid",
+      "domain": "developer tools",
+      "key_requirements": ["customer operations", "process improvement", "Gainsight", "SQL", "stakeholder management", "change management"],
+      "compensation": {"min": null, "max": null, "currency": null, "equity_mentioned": false}
+    },
+    "expected_output": {
+      "scores": {
+        "title_match": {"score": 0.9, "tolerance": 0.15},
+        "domain_match": {"score": 0.9, "tolerance": 0.15},
+        "seniority_match": {"score": 1.0, "tolerance": 0.10},
+        "requirements_fit": {"score": 0.7, "tolerance": 0.20},
+        "compensation_fit": {"score": 0.5, "tolerance": 0.15}
+      },
+      "expected_bonus": true,
+      "expected_penalty": false,
+      "total_score_range": [0.65, 1.0]
+    },
+    "tags": ["strong_match", "developer_tools", "no_comp", "hybrid"],
+    "notes": "Customer Operations Lead is a target title. Developer tools is a target domain. Staff is in range. Unknown comp -> 0.5. Hybrid triggers the remote-preference bonus (profile accepts hybrid). Forge DevTools is not a large enterprise (no penalty).",
+    "synthetic": true
+  }
+]

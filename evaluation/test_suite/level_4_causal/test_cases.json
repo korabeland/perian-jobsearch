@@ -1,0 +1,106 @@
+[
+  {
+    "id": "causal_01",
+    "description": "CX Manager at a gaming company -- domain mismatch but strong title match",
+    "prompt_context": "A listing for Customer Experience Manager at a gaming company. The candidate has strong CX skills (Salesforce, Medallia, stakeholder management) but gaming is not a target domain. The role itself is a direct title match and fully remote.",
+    "input": {
+      "listing": {"title": "Customer Experience Manager", "company": "Pixelforge Games", "domain": "gaming", "seniority": "senior", "remote_policy": "remote", "requirements": ["Salesforce", "Medallia", "CX strategy", "stakeholder management"], "compensation": {"min": 135000, "max": 160000}},
+      "profile_summary": "Customer Experience / Product professional (10+ years). Targets Customer Experience Manager, Customer Success Manager, Product Manager, Customer Operations Lead, and Director of Customer Experience roles. Domains: SaaS, B2B technology, AI/ML, developer tools. Skills: Salesforce, Service Cloud, Gainsight, Medallia, GA4, Looker, Tableau, SQL, Python. Remote preferred, hybrid acceptable. Dealbreakers: onsite-only, junior level, large enterprise (10k+ employees), anti-AI culture."
+    },
+    "expected_conclusion": "moderate_match",
+    "expected_reasoning_mentions": ["domain", "gaming", "remote"],
+    "tags": ["domain_mismatch", "title_match", "remote"],
+    "synthetic": true
+  },
+  {
+    "id": "causal_02",
+    "description": "Director of CX at perfect company, full-time onsite -- onsite dealbreaker",
+    "prompt_context": "A listing for Director of Customer Experience at a strong SaaS company. Perfect title, domain, and seniority. But it requires full-time onsite work, and the candidate treats onsite-only roles as a dealbreaker -- they strongly prefer remote.",
+    "input": {
+      "listing": {"title": "Director of Customer Experience", "company": "Globex Software", "domain": "SaaS", "seniority": "principal", "remote_policy": "onsite", "location": "Chicago, IL", "requirements": ["CX strategy", "Salesforce", "team leadership", "NPS/CSAT programs", "cross-functional stakeholder management"], "compensation": {"min": 175000, "max": 205000}},
+      "profile_summary": "Customer Experience / Product professional (10+ years). Targets Customer Experience Manager, Customer Success Manager, Product Manager, Customer Operations Lead, and Director of Customer Experience roles. Domains: SaaS, B2B technology, AI/ML, developer tools. Skills: Salesforce, Service Cloud, Gainsight, Medallia, GA4, Looker, Tableau, SQL, Python. Remote preferred, hybrid acceptable. Dealbreakers: onsite-only, junior level, large enterprise (10k+ employees), anti-AI culture."
+    },
+    "expected_conclusion": "weak_match",
+    "expected_reasoning_mentions": ["onsite", "dealbreaker", "remote"],
+    "tags": ["onsite_dealbreaker", "strong_otherwise"],
+    "synthetic": true
+  },
+  {
+    "id": "causal_03",
+    "description": "Strong fit but base salary below floor -- equity at Series A could offset",
+    "prompt_context": "A listing for CX Manager at a Series A AI startup. Title, domain, and remote policy are ideal, but the base salary of $90k-$110k is below the candidate's $125k floor. The role offers meaningful early-stage equity.",
+    "input": {
+      "listing": {"title": "Customer Experience Manager", "company": "Nimbus AI", "domain": "AI/ML", "seniority": "senior", "remote_policy": "remote", "requirements": ["Salesforce", "Medallia", "CX strategy", "SQL"], "compensation": {"min": 90000, "max": 110000, "equity_mentioned": true}},
+      "profile_summary": "Customer Experience / Product professional (10+ years). Targets Customer Experience Manager, Customer Success Manager, Product Manager, Customer Operations Lead, and Director of Customer Experience roles. Domains: SaaS, B2B technology, AI/ML, developer tools. Skills: Salesforce, Service Cloud, Gainsight, Medallia, GA4, Looker, Tableau, SQL, Python. Remote preferred, hybrid acceptable. Compensation target: $125k-$175k base. Dealbreakers: onsite-only, junior level, large enterprise (10k+ employees), anti-AI culture."
+    },
+    "expected_conclusion": "moderate_match",
+    "expected_reasoning_mentions": ["compensation", "equity", "below"],
+    "tags": ["comp_below_floor", "equity_offset", "startup"],
+    "synthetic": true
+  },
+  {
+    "id": "causal_04",
+    "description": "Strong match but 6-month contract -- candidate wants full-time",
+    "prompt_context": "A listing for a Customer Experience Manager that is a strong match on title, domain, and remote policy, but it is a 6-month contract. The candidate is seeking a full-time permanent role.",
+    "input": {
+      "listing": {"title": "Customer Experience Manager (Contract)", "company": "Brightwave Software", "domain": "SaaS", "seniority": "senior", "remote_policy": "remote", "employment_type": "6-month contract, possible extension", "requirements": ["Salesforce", "CX strategy", "customer journey mapping", "Medallia"]},
+      "profile_summary": "Customer Experience / Product professional (10+ years). Targets Customer Experience Manager, Customer Success Manager, Product Manager, Customer Operations Lead, and Director of Customer Experience roles. Domains: SaaS, B2B technology, AI/ML, developer tools. Skills: Salesforce, Service Cloud, Gainsight, Medallia, GA4, Looker, Tableau, SQL, Python. Remote preferred, hybrid acceptable. Dealbreakers: onsite-only, junior level, large enterprise (10k+ employees), anti-AI culture."
+    },
+    "expected_conclusion": "moderate_match",
+    "expected_reasoning_mentions": ["contract", "full-time"],
+    "tags": ["contract", "full_time_preference"],
+    "synthetic": true
+  },
+  {
+    "id": "causal_05",
+    "description": "Near-ideal full match -- everything aligns",
+    "prompt_context": "A listing for a Customer Success Manager at a SaaS company. Title, domain, seniority, remote policy, and compensation all align with the candidate's profile.",
+    "input": {
+      "listing": {"title": "Customer Success Manager", "company": "Acme Cloud", "domain": "SaaS", "seniority": "senior", "remote_policy": "remote", "requirements": ["Salesforce", "Gainsight", "Medallia", "SQL", "stakeholder management"], "compensation": {"min": 140000, "max": 170000, "equity_mentioned": true}},
+      "profile_summary": "Customer Experience / Product professional (10+ years). Targets Customer Experience Manager, Customer Success Manager, Product Manager, Customer Operations Lead, and Director of Customer Experience roles. Domains: SaaS, B2B technology, AI/ML, developer tools. Skills: Salesforce, Service Cloud, Gainsight, Medallia, GA4, Looker, Tableau, SQL, Python. Remote preferred, hybrid acceptable. Dealbreakers: onsite-only, junior level, large enterprise (10k+ employees), anti-AI culture."
+    },
+    "expected_conclusion": "strong_match",
+    "expected_reasoning_mentions": ["remote", "customer success", "salesforce"],
+    "tags": ["strong_match", "full_alignment"],
+    "synthetic": true
+  },
+  {
+    "id": "causal_06",
+    "description": "Wrong function + junior + onsite -- clear no match",
+    "prompt_context": "A listing for a Junior Accountant at a large retailer. The function (accounting) is unrelated to the candidate's target roles, the seniority is junior, and it is onsite.",
+    "input": {
+      "listing": {"title": "Junior Accountant", "company": "MegaMart Global", "domain": "finance", "seniority": "junior", "remote_policy": "onsite", "requirements": ["Excel", "QuickBooks", "bookkeeping", "accounts payable"], "compensation": {"min": 50000, "max": 60000}},
+      "profile_summary": "Customer Experience / Product professional (10+ years). Targets Customer Experience Manager, Customer Success Manager, Product Manager, Customer Operations Lead, and Director of Customer Experience roles. Domains: SaaS, B2B technology, AI/ML, developer tools. Skills: Salesforce, Service Cloud, Gainsight, Medallia, GA4, Looker, Tableau, SQL, Python. Remote preferred, hybrid acceptable. Dealbreakers: onsite-only, junior level, large enterprise (10k+ employees), anti-AI culture."
+    },
+    "expected_conclusion": "no_match",
+    "expected_reasoning_mentions": ["junior", "onsite", "accounting"],
+    "tags": ["no_match", "wrong_function", "stacked_dealbreakers"],
+    "synthetic": true
+  },
+  {
+    "id": "causal_07",
+    "description": "Title + remote match but large-enterprise dealbreaker",
+    "prompt_context": "A listing for Customer Experience Manager at a 60,000-employee retailer. The title is a match and the role is remote, but the candidate treats companies with 10k+ employees as a dealbreaker, and retail is not a target domain.",
+    "input": {
+      "listing": {"title": "Customer Experience Manager", "company": "Titan Retail Group", "domain": "retail", "seniority": "senior", "remote_policy": "remote", "company_size": "60,000 employees", "requirements": ["Salesforce", "Medallia", "customer surveys", "team coordination"], "compensation": {"min": 135000, "max": 160000}},
+      "profile_summary": "Customer Experience / Product professional (10+ years). Targets Customer Experience Manager, Customer Success Manager, Product Manager, Customer Operations Lead, and Director of Customer Experience roles. Domains: SaaS, B2B technology, AI/ML, developer tools. Skills: Salesforce, Service Cloud, Gainsight, Medallia, GA4, Looker, Tableau, SQL, Python. Remote preferred, hybrid acceptable. Dealbreakers: onsite-only, junior level, large enterprise (10k+ employees), anti-AI culture."
+    },
+    "expected_conclusion": "weak_match",
+    "expected_reasoning_mentions": ["enterprise", "employees", "remote"],
+    "tags": ["large_enterprise_dealbreaker", "domain_mismatch", "title_match"],
+    "synthetic": true
+  },
+  {
+    "id": "causal_08",
+    "description": "Adjacent domain + heavy travel exceeding comfort",
+    "prompt_context": "A listing for Customer Operations Lead at a fintech firm. The title and seniority are a good match, but the role requires ~40% travel, exceeding the candidate's ~25% comfort threshold, and fintech is an adjacent rather than target domain.",
+    "input": {
+      "listing": {"title": "Customer Operations Lead", "company": "Meridian Financial", "domain": "fintech", "seniority": "staff", "remote_policy": "hybrid", "travel": "up to 40%", "requirements": ["customer operations", "Salesforce", "process improvement", "change management"], "compensation": {"min": 150000, "max": 175000}},
+      "profile_summary": "Customer Experience / Product professional (10+ years). Targets Customer Experience Manager, Customer Success Manager, Product Manager, Customer Operations Lead, and Director of Customer Experience roles. Domains: SaaS, B2B technology, AI/ML, developer tools. Skills: Salesforce, Service Cloud, Gainsight, Medallia, GA4, Looker, Tableau, SQL, Python. Remote preferred, hybrid acceptable. Dealbreakers: onsite-only, junior level, large enterprise (10k+ employees), anti-AI culture."
+    },
+    "expected_conclusion": "moderate_match",
+    "expected_reasoning_mentions": ["travel", "hybrid"],
+    "tags": ["heavy_travel", "adjacent_domain"],
+    "synthetic": true
+  }
+]

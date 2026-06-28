@@ -47,6 +47,43 @@ gitignored.
 > `scripts/runner.py`. Edit the `ollama_name` values to match the models you have
 > installed locally.
 
+## Evaluation
+
+The `evaluation/` suite measures local-model capability with a 6-level battery
+(extraction → classification → conditional scoring → causal reasoning → batch
+consistency → synthesis), bootstrap confidence intervals, and a production-vs-capability
+"prompt-fit gap". Ground truth lives in `test_cases.json` per level — the data here is
+**placeholder** (fictional listings aligned to the placeholder profile).
+
+```bash
+# All 6 levels for one model (writes evaluation/results/{model}_{timestamp}.json)
+python3 evaluation/run_all.py --model qwen3.5:9b --n-runs 3
+
+# A subset of levels
+python3 evaluation/run_all.py --model qwen3.5:9b --levels 2 3 4
+```
+
+Levels 1 and 6 use embedding-based semantic matching — `ollama pull nomic-embed-text`
+first (levels 2–5 are pure string/numeric comparison). See
+`evaluation/EVAL_METHODOLOGY.md` for the metrics, statistical design, and the model
+upgrade decision framework.
+
+## Autoresearch (prompt optimization)
+
+`autoresearch/` is a closed loop that improves the `extract.md` / `score.md` prompts
+against held-out data with ground-truth labels. A headless reasoning session proposes
+prompt mutations; a deterministic eval gate accepts one **only if the numbers improve**,
+then a safety gate guards against capability regressions. The rubric in
+`autoresearch/eval_criteria.md` is locked — the loop never edits its own grading.
+
+```bash
+# One-time holdout generation (uses the Claude API; see autoresearch/readiness.md)
+python3 autoresearch/generate_holdout.py --template both
+
+# Run the optimization loop
+python3 autoresearch/prompt_loop.py --template extract --max-iterations 5
+```
+
 ## Layout
 
 ```
@@ -68,7 +105,19 @@ scripts/
   triage_eval.py      ← triage-gate evaluation
   feedback.py         ← record human verdicts on scored items
   enrich_queue.py     ← re-fetch + re-score low-signal items
+  fleet_log.py        ← append-only fleet changelog (used by the eval harness)
 inputs/sample.jsonl   ← placeholder listings for the smoke run
+evaluation/
+  run_all.py          ← 6-level capability eval harness
+  test_suite/         ← levels 1–6: run_test.py + placeholder test_cases.json
+  helpers.py          ← Ollama client, prompt builders, logprob stats
+  stats.py            ← bootstrap CIs + significance tests
+  semantic.py         ← embedding-based matching (nomic-embed-text)
+  EVAL_METHODOLOGY.md ← metrics, test design, upgrade framework
+autoresearch/
+  prompt_loop.py      ← optimization loop (propose → eval → accept/reject → safety gate)
+  generate_holdout.py ← one-time holdout generation (Claude API)
+  eval_criteria.md    ← LOCKED grading rubric
 ```
 
 ## License
