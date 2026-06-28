@@ -1,0 +1,16 @@
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+
+# Runtime artifacts (regenerated each run)
+state/
+output/
+run-log/
+
+# Collected listings (only the placeholder sample.jsonl is tracked)
+inputs/collected-*.jsonl
+
+# OS
+.DS_Store
