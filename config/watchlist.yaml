@@ -1,0 +1,28 @@
+# Placeholder watchlist — fictional companies for the public reference.
+# The real watchlist (target employers) is private and not included here.
+#
+# Each entry is a company to poll directly via its ATS adapter:
+#   ats: greenhouse | ashby | workable  -> needs `board_token`
+#   ats: websearch                      -> needs `search_query` (+ optional `url`)
+
+companies:
+  - company: Northwind Labs
+    ats: greenhouse
+    board_token: northwindlabs
+
+  - company: Acme Cloud
+    ats: greenhouse
+    board_token: acmecloud
+
+  - company: Globex Software
+    ats: ashby
+    board_token: globex
+
+  - company: Initech SaaS
+    ats: workable
+    board_token: initech
+
+  - company: Umbrella Analytics
+    ats: websearch
+    search_query: "Umbrella Analytics careers customer experience"
+    url: "https://example.com/umbrella"
