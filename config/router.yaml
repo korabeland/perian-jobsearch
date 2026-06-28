@@ -1,0 +1,13 @@
+escalation:
+  mode: active             # Options: logging_only, active
+  metric: mean_logprob
+  threshold: -1.5          # Items with mean_logprob below this get escalated
+  max_escalation_rate: 0.25 # Circuit breaker: never escalate more than 25% of items
+  log_both_outputs: true    # Keep both cheap and escalated outputs for analysis
+  escalation_target: qwen3.5-27b-int4
+  # NOTE: Ollama 0.24.0 returns logprobs when requested top-level (logprobs: true
+  # + top_logprobs: N) — verified 2026-06-20 on both ggml and MLX runners, including
+  # under grammar-constrained decoding. runner.py now requests and parses them
+  # correctly, so this escalation path is live (dormant since Phase 2 until 2026-06-20).
+  # Score-based floor penalties (plan.yaml dimension_floors) and adversarial
+  # challenge (Step 3) remain as complementary guardrails.

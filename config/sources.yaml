@@ -1,0 +1,78 @@
+defaults:
+  rate_limit_seconds: 2
+  timeout_seconds: 30
+  page_limit: 5
+  user_agent: "Perian/1.0 (job search agent)"
+
+sources:
+  # --- Primary: Discovery APIs (broad search) ---
+  - id: himalayas
+    type: himalayas
+    enabled: true
+    base_url: "https://himalayas.app/jobs/api"
+    params:
+      categories: ["customer-success", "product", "marketing", "operations"]
+      limit: 50
+    page_limit: 3
+
+  - id: jobicy
+    type: jobicy
+    enabled: true
+    base_url: "https://jobicy.com/api/v2/remote-jobs"
+    params:
+      tags: ["customer+success", "product+manager", "marketing", "operations"]
+      count: 50
+
+  # --- Secondary: ATS watchlist (specific companies) ---
+  - id: greenhouse_watchlist
+    type: greenhouse
+    enabled: true
+
+  - id: ashby_watchlist
+    type: ashby
+    enabled: true
+
+  - id: workable_watchlist
+    type: workable
+    enabled: true
+
+  # --- Tertiary: Web search fallback (no ATS companies) ---
+  - id: websearch_watchlist
+    type: websearch
+    enabled: true
+
+  # --- LinkedIn via Gmail alerts ---
+  - id: linkedin_alerts
+    type: gmail_alerts
+    enabled: true
+    sender: "jobs-noreply@linkedin.com"
+    max_age_hours: 24
+    credentials_path: "${GMAIL_CREDENTIALS_PATH}"   # OAuth credentials JSON
+    token_path: "./state/gmail_token.json"           # Auto-refreshed token
+
+  # --- Aggregators: Major job boards via python-jobspy ---
+  - id: jobspy_aggregator
+    type: jobspy
+    enabled: true
+    params:
+      search_terms:
+        - "customer success manager"
+        - "customer experience manager"
+        - "product manager"
+        - "customer operations manager"
+      sites: ["google", "indeed"]
+      results_wanted: 30
+      hours_old: 24
+      is_remote: true
+      country: "USA"
+
+  # --- Future: Registration-required APIs ---
+  - id: adzuna
+    type: adzuna
+    enabled: false
+    auth: {app_id: "${ADZUNA_APP_ID}", app_key: "${ADZUNA_APP_KEY}"}
+
+  - id: the_muse
+    type: the_muse
+    enabled: false
+    auth: {api_key: "${MUSE_API_KEY}"}

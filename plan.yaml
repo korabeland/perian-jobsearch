@@ -1,0 +1,90 @@
+meta:
+  last_refined: null  # Updated when the cloud model revises this plan
+
+sources:
+  - id: job_csv
+    type: csv
+    path: ./inputs/
+    fields: {title: 0, company: 1, url: 2, description: 3}
+
+  - id: collected_jsonl
+    type: jsonl
+    path: ./inputs/
+    description: "Output from scripts/collect.py"
+
+scoring:
+  dimensions:
+    title_match: 0.25
+    domain_match: 0.15
+    seniority_match: 0.25
+    requirements_fit: 0.20
+    compensation_fit: 0.15
+  bonuses:
+    - condition: "remote_policy matches preference"
+      bonus: 0.10
+  penalties:
+    - condition: "full-time on-site with no remote flexibility"
+      penalty: -0.30
+    - condition: "junior or entry-level seniority"
+      penalty: -0.40
+    - condition: "company has 10000+ employees (large enterprise)"
+      penalty: -0.20
+    - condition: "anti-AI culture or resistance to AI adoption"
+      penalty: -0.15
+    - condition: "heavy travel requirements exceeding 25%"
+      penalty: -0.15
+  # Post-LLM floor penalties: applied by runner.py after scoring, not by the LLM.
+  # If a dimension scores below its threshold, the penalty is subtracted from
+  # total_score and re-clamped to [0, 1]. Stacks with LLM-applied penalties.
+  dimension_floors:
+    - dimension: title_match
+      threshold: 0.3
+      penalty: -0.25
+    - dimension: seniority_match
+      threshold: 0.2
+      penalty: -0.20
+  # Post-LLM extraction field penalties: applied by runner.py after scoring.
+  # If an extracted field matches the value, the penalty is subtracted from
+  # total_score. Catches cases where the LLM ignores scoring prompt instructions.
+  extraction_floors:
+    - field: company_size
+      match: enterprise
+      penalty: -0.30
+
+steps:
+  - id: ingest
+    type: deterministic
+    description: "Load CSV from ./inputs/ and normalize to common schema"
+
+  - id: dedup
+    type: deterministic
+    description: "Check against state/seen.json by URL and title+company"
+
+  - id: extract
+    type: llm_local
+    description: "Extract structured fields from raw listing text"
+    prompt_template: "./prompts/extract.md"
+    capability: extraction
+    min_reliability: 0.85
+    output_fields: [title, company, seniority, remote_policy, domain, key_requirements, compensation]
+
+  - id: score
+    type: llm_local
+    description: "Score each listing 0-1 against profile.md using scoring weights"
+    prompt_template: "./prompts/score.md"
+    capability: conditional_reasoning
+    min_reliability: 0.80
+
+  - id: rank_and_filter
+    type: deterministic
+    description: "Filter by min_score 0.6, sort descending, cap at 15"
+    min_score: 0.6
+    max_items: 15
+
+  - id: output
+    type: deterministic
+    description: "Write markdown briefing to output/briefing-{date}.md"
+
+  - id: update_ledger
+    type: deterministic
+    description: "Append processed items to state/seen.json"

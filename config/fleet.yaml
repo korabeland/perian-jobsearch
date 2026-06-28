@@ -1,0 +1,58 @@
+fleet:
+  concurrency_budget_gb: 38  # Total GPU memory available for models
+  default_min_reliability: 0.80
+
+  # Measured by evaluation suite (think=False, 3 runs/case).
+  # Fleet rebaselined 2026-04-07: MLX migration (9b-nvfp4, 27b-int4) +
+  # cross-family Aragorn challenger (gemma4:26b).
+  # L6 synthesis scores use semantic matching — lower than word-overlap but more accurate.
+  models:
+    - id: qwen3.5-27b-int4
+      ollama_name: "qwen3.5:27b-int4"
+      size_gb: 16
+      backend: mlx
+      capabilities:
+        extraction: 0.92
+        classification: 1.00
+        conditional_reasoning: 0.85
+        causal_reasoning: 0.87
+        synthesis: 0.21
+        json_output: 0.99
+        nuanced_judgment: 0.85
+      notes: "Escalation target. MLX int4 format — 64% faster than GGUF, quality preserved."
+
+    - id: gemma4-26b
+      ollama_name: "gemma4:26b"
+      size_gb: 17
+      backend: ggml
+      capabilities:
+        extraction: 0.96
+        classification: 1.00
+        conditional_reasoning: 0.86
+        causal_reasoning: 0.90
+        synthesis: 0.15
+        json_output: 1.00
+        nuanced_judgment: 0.88
+      notes: "Aragorn adversarial challenger. Cross-family (Gemma) breaks correlated Qwen failure modes. MoE 3.8B active."
+
+    - id: qwen3.5-9b-nvfp4
+      ollama_name: "qwen3.5:9b-nvfp4"
+      size_gb: 8.9
+      backend: mlx
+      capabilities:
+        extraction: 0.91
+        classification: 0.95
+        conditional_reasoning: 0.82
+        causal_reasoning: 0.85
+        synthesis: 0.21
+        json_output: 0.98
+        nuanced_judgment: 0.83
+      notes: "First-pass extraction and scoring. MLX nvfp4 format — 53% faster than GGUF, quality within noise."
+
+  specialist_overrides:
+    nuanced_judgment:
+      prefer: gemma4-26b
+      reason: "gemma4:26b measured 0.88 nuanced_judgment — fleet best"
+    causal_reasoning:
+      prefer: gemma4-26b
+      reason: "gemma4:26b measured 0.90 causal_reasoning — fleet best"
