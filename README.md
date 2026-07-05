@@ -3,6 +3,10 @@
 A runnable, sanitized reference implementation of the job-search workflow that the
 [Perian framework](https://github.com/korabeland/perian) was first built around.
 
+> **Frozen snapshot (June 2026).** A one-time, sanitized reference — not a live
+> mirror of the private lab, and not automatically synced, so it may lag active
+> development.
+
 Everything here runs **locally** against [Ollama](https://ollama.com) on **placeholder
 data** — a fictional candidate profile and example job listings. There is no personal
 data and no cloud API in the daily path. Swap in your own `profile.md` and
