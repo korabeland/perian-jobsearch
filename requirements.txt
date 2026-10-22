@@ -1,5 +1,5 @@
 # Core pipeline (runner.py: triage -> extract -> score -> rank)
-requests>=2.31
+requests>=2.34.2
 PyYAML>=6.0
 
 # Optional — only needed for scripts/collect.py source adapters:
