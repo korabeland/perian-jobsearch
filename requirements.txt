@@ -1,6 +1,6 @@
 # Core pipeline (runner.py: triage -> extract -> score -> rank)
 requests>=2.31
-PyYAML>=6.0
+PyYAML>=6.0.3
 
 # Optional — only needed for scripts/collect.py source adapters:
 #   python-jobspy            # jobspy aggregator (Indeed/Google)
